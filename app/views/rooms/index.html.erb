@@ -7,7 +7,7 @@
     <% if room.room_image.present? %>
       <%= image_tag room.room_image %>
     <% else %>
-      <%= image_tag "default_room.jpg" %>
+      <%= image_tag "default_room.png" %>
     <% end %>
     <%= link_to room.name, room_path(room) %>
     <p><%= room.description %></p>

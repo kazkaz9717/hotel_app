@@ -1,0 +1,17 @@
+<h1>予約確認</h1>
+
+<p>チェックイン日：<%= @reservation.check_in.strftime("%Y/%m/%d") %></p>
+<p>チェックアウト日：<%= @reservation.check_out.strftime("%Y/%m/%d") %></p>
+<p>宿泊日数：<%= (@reservation.check_out - @reservation.check_in).to_i %>泊</p>
+<p>人数：<%= @reservation.guests %>人</p>
+<p>支払い金額：¥<%= @total_price %></p>
+
+<%= form_with url: reservations_path, data: { turbo: false } do |f| %>
+  <%= hidden_field_tag :room_id, @room.id %>
+  <%= hidden_field_tag "reservation[check_in]", @reservation.check_in %>
+  <%= hidden_field_tag "reservation[check_out]", @reservation.check_out %>
+  <%= hidden_field_tag "reservation[guests]", @reservation.guests %>
+  <%= f.submit "予約を確定する" %>
+<% end %>
+
+<%= link_to "戻る", new_reservation_path(room_id: @room.id) %>

@@ -5,7 +5,7 @@
     <% if reservation.room.room_image.present? %>
       <%= image_tag reservation.room.room_image %>
     <% else %>
-      <%= image_tag "default_room.jpg" %>
+      <%= image_tag "default_room.png" %>
     <% end %>
     <p><%= reservation.room.name %></p>
     <p><%= reservation.room.description %></p>

@@ -1,27 +1,4 @@
 Rails.application.routes.draw do
-  get "reservations/index"
-  get "reservations/new"
-  get "reservations/create"
-  get "reservations/destroy"
-  get "rooms/index"
-  get "rooms/new"
-  get "rooms/create"
-  get "rooms/show"
-  get "rooms/edit"
-  get "rooms/update"
-  get "rooms/destroy"
-  get "rooms/search"
-  get "users/new"
-  get "users/create"
-  get "users/show"
-  get "users/edit"
-  get "users/update"
-  get "users/account"
-  get "users/edit_account"
-  get "users/update_account"
-  get "sessions/new"
-  get "sessions/create"
-  get "sessions/destroy"
   root "rooms#index"
 
   get    "/signup",  to: "users#new"
@@ -44,5 +21,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :reservations, only: [:new, :create, :index, :destroy]
+  resources :reservations, only: [:new, :create, :index, :destroy] do
+    collection do
+      post :confirm
+    end
+  end
 end

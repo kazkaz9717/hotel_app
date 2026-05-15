@@ -10,6 +10,21 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new
   end
 
+  def confirm
+    @room = Room.find(params[:room_id])
+    @reservation = Reservation.new(reservation_params)
+    @reservation.room_id = @room.id
+    @reservation.user_id = current_user.id
+    if @reservation.valid?
+      nights = (@reservation.check_out - @reservation.check_in).to_i
+      @total_price = @room.price * nights * @reservation.guests
+      render :confirm
+    else
+      Rails.logger.debug @reservation.errors.full_messages
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   def create
     @room = Room.find(params[:room_id])
     @reservation = current_user.reservations.build(reservation_params)

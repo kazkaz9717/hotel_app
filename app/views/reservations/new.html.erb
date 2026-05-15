@@ -3,7 +3,7 @@
 <h2><%= @room.name %></h2>
 <p>¥<%= @room.price %>/日</p>
 
-<%= form_with model: @reservation, url: reservations_path do |f| %>
+<%= form_with model: @reservation, url: confirm_reservations_path, data: { turbo: false } do |f| %>
   <%= hidden_field_tag :room_id, @room.id %>
   <div>
     <%= f.label :check_in, "チェックイン日" %>
@@ -17,7 +17,7 @@
     <%= f.label :guests, "人数" %>
     <%= f.number_field :guests %>
   </div>
-  <%= f.submit "予約を確定する" %>
+  <%= f.submit "確認する" %>
 <% end %>
 
 <%= link_to "戻る", room_path(@room) %>
