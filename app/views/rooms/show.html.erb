@@ -1,0 +1,18 @@
+<h1><%= @room.name %></h1>
+
+<% if @room.room_image.present? %>
+  <%= image_tag @room.room_image %>
+<% else %>
+  <%= image_tag "default_room.jpg" %>
+<% end %>
+
+<p><%= @room.description %></p>
+<p>¥<%= @room.price %>/日</p>
+
+<% if logged_in? && @room.user == current_user %>
+  <%= link_to "編集する", edit_room_path(@room) %>
+<% end %>
+
+<%= link_to "予約する", new_reservation_path(room_id: @room.id) %>
+
+<%= link_to "戻る", :back %>

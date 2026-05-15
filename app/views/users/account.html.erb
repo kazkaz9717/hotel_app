@@ -1,0 +1,7 @@
+<h1>アカウント</h1>
+
+<p>メールアドレス：<%= @user.email %></p>
+<p>パスワード：*********</p>
+
+<%= link_to "アカウント情報を編集する", edit_account_users_path %>
+<%= link_to "プロフィールを編集する", edit_user_path(@user) %>

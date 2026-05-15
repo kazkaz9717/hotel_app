@@ -1,0 +1,17 @@
+<h1>施設一覧</h1>
+
+<%= link_to "施設を登録する", new_room_path %>
+
+<% @rooms.each do |room| %>
+  <div>
+    <% if room.room_image.present? %>
+      <%= image_tag room.room_image %>
+    <% else %>
+      <%= image_tag "default_room.jpg" %>
+    <% end %>
+    <%= link_to room.name, room_path(room) %>
+    <p><%= room.description %></p>
+    <p>¥<%= room.price %>/日</p>
+    <p><%= room.created_at.strftime("%Y/%m/%d") %></p>
+  </div>
+<% end %>

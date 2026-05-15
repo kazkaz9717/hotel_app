@@ -1,0 +1,12 @@
+<h1>検索結果</h1>
+
+<p>検索結果：<%= @count %>件</p>
+
+<% @rooms.each do |room| %>
+  <div>
+    <%= link_to room.name, room_path(room) %>
+    <p><%= room.address %></p>
+    <p><%= room.description %></p>
+    <p>¥<%= room.price %>/日</p>
+  </div>
+<% end %>
