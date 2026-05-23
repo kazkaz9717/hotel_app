@@ -1,19 +1,29 @@
-<h1>アカウント情報の編集</h1>
+<div class="auth-container">
+  <h1>アカウント情報の編集</h1>
 
-<%= form_with model: @user, url: update_account_users_path, method: :patch do |f| %>
-  <div>
-    <%= f.label :email, "メールアドレス" %>
-    <%= f.email_field :email %>
-  </div>
-  <div>
-    <%= f.label :password, "パスワード" %>
-    <%= f.password_field :password %>
-  </div>
-  <div>
-    <%= f.label :password_confirmation, "確認用パスワード" %>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <%= f.submit "更新する" %>
-<% end %>
+  <% if @user.errors.any? %>
+    <div style="background:#f8d7da; color:#721c24; padding:12px; border-radius:4px; margin-bottom:16px;">
+      <% @user.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
 
-<%= link_to "戻る", account_users_path %>
+  <%= form_with model: @user, url: update_account_users_path, method: :patch do |f| %>
+    <div>
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.email_field :email %>
+    </div>
+    <div>
+      <%= f.label :password, "パスワード" %>
+      <%= f.password_field :password %>
+    </div>
+    <div>
+      <%= f.label :password_confirmation, "確認用パスワード" %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <%= f.submit "更新する" %>
+  <% end %>
+
+  <%= link_to "戻る", account_users_path %>
+</div>

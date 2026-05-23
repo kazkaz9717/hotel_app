@@ -1,6 +1,14 @@
 <div class="auth-container">
   <h1>新規登録</h1>
 
+  <% if @user.errors.any? %>
+    <div style="background:#f8d7da; color:#721c24; padding:12px; border-radius:4px; margin-bottom:16px;">
+      <% @user.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+
   <%= form_with model: @user, url: signup_path do |f| %>
     <div>
       <%= f.label :name, "名前" %>
