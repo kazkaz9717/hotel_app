@@ -4,7 +4,7 @@ class Reservation < ApplicationRecord
 
   validates :check_in, presence: true
   validates :check_out, presence: true
-  validates :guests, presence: true, numericality: { greater_than_or_equal_to: 1 }
+  validates :guests, presence: true, numericality: { greater_than_or_equal_to: 1, message: "は1人以上を入力してください" }
 
   validate :check_in_must_be_future
   validate :check_out_must_be_after_check_in
