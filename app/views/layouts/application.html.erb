@@ -13,36 +13,36 @@
     <header>
       <nav>
         <%= link_to "HotelApp", root_path %>
-        <div>
-          <%= form_with url: search_rooms_path, method: :get do |f| %>
-            <%= f.select :area, [["エリアを選択", ""], ["東京", "東京"], ["大阪", "大阪"], ["京都", "京都"], ["札幌", "札幌"]] %>
-            <%= f.text_field :keyword, placeholder: "フリーワード検索" %>
-            <%= f.submit "検索" %>
-          <% end %>
-        </div>
-        <div>
-          <% if logged_in? %>
-            <div style="position: relative; display: inline-block;">
-              <% if current_user.icon_image.present? %>
-                <%= image_tag current_user.icon_image, style: "width: 30px; height: 30px; border-radius: 50%;" %>
-              <% else %>
-                <%= image_tag "default_icon.png", style: "width: 30px; height: 30px; border-radius: 50%;" %>
-              <% end %>
-              <span onclick="document.getElementById('dropdown').style.display = document.getElementById('dropdown').style.display === 'none' ? 'block' : 'none'" style="cursor: pointer;">
-                <%= current_user.name %>
-              </span>
-              <div id="dropdown" style="display: none; position: absolute; background: white; border: 1px solid #ccc; padding: 10px;">
-                <%= link_to "アカウント", account_users_path %><br>
-                <%= link_to "施設一覧", rooms_path %><br>
-                <%= link_to "予約一覧", reservations_path %><br>
-                <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete } %>
+          <div>
+            <%= form_with url: search_rooms_path, method: :get do |f| %>
+              <%= f.select :area, [["エリアを選択", ""], ["東京", "東京"], ["大阪", "大阪"], ["京都", "京都"], ["札幌", "札幌"]] %>
+              <%= f.text_field :keyword, placeholder: "フリーワード検索" %>
+              <%= f.submit "検索" %>
+            <% end %>
+          </div>
+          <div>
+            <% if logged_in? %>
+              <div style="position: relative; display: inline-block;">
+                <% if current_user.icon_image.attached? %>
+                  <%= image_tag current_user.icon_image, style: "width: 30px; height: 30px; border-radius: 50%;" %>
+                <% else %>
+                  <%= image_tag "default_icon.png", style: "width: 30px; height: 30px; border-radius: 50%;" %>
+                <% end %>
+                <span onclick="document.getElementById('dropdown').style.display = document.getElementById('dropdown').style.display === 'none' ? 'block' : 'none'" style="cursor: pointer;">
+                  <%= current_user.name %>
+                </span>
+                <div id="dropdown" style="display: none; position: absolute; background: white; border: 1px solid #ccc; padding: 10px;">
+                  <%= link_to "アカウント", account_users_path %><br>
+                  <%= link_to "施設一覧", rooms_path %><br>
+                  <%= link_to "予約一覧", reservations_path %><br>
+                  <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete } %>
+                </div>
               </div>
-            </div>
-          <% else %>
-            <%= link_to "ログイン", login_path %>
-            <%= link_to "新規登録", signup_path %>
-          <% end %>
-        </div>
+            <% else %>
+              <%= link_to "ログイン", login_path %>
+              <%= link_to "新規登録", signup_path %>
+            <% end %>
+          </div>
       </nav>
     </header>
 

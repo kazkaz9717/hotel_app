@@ -1,17 +1,20 @@
 <h1>施設一覧</h1>
-
 <%= link_to "施設を登録する", new_room_path %>
 
-<% @rooms.each do |room| %>
-  <div>
-    <% if room.room_image.present? %>
-      <%= image_tag room.room_image %>
-    <% else %>
-      <%= image_tag "default_room.png" %>
-    <% end %>
-    <%= link_to room.name, room_path(room) %>
-    <p><%= room.description %></p>
-    <p>¥<%= room.price %>/日</p>
-    <p><%= room.created_at.strftime("%Y/%m/%d") %></p>
-  </div>
-<% end %>
+<div class="room-grid">
+  <% @rooms.each do |room| %>
+    <div class="room-card">
+      <% if room.room_image.attached? %>
+        <%= image_tag room.room_image, class: "room-image" %>
+      <% else %>
+        <%= image_tag "default_room.png", class: "room-image" %>
+      <% end %>
+      <div class="room-info">
+        <%= link_to room.name, room_path(room), class: "room-name" %>
+        <p><%= room.description %></p>
+        <p>¥<%= room.price %>/日</p>
+        <p><%= room.created_at.strftime("%Y/%m/%d") %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

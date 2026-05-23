@@ -1,23 +1,27 @@
-<h1>新規登録</h1>
+<div class="auth-container">
+  <h1>新規登録</h1>
 
-<%= form_with model: @user, url: signup_path do |f| %>
-  <div>
-    <%= f.label :name, "名前" %>
-    <%= f.text_field :name %>
-  </div>
-  <div>
-    <%= f.label :email, "メールアドレス" %>
-    <%= f.email_field :email %>
-  </div>
-  <div>
-    <%= f.label :password, "パスワード" %>
-    <%= f.password_field :password %>
-  </div>
-  <div>
-    <%= f.label :password_confirmation, "確認用パスワード" %>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <%= f.submit "登録する" %>
-<% end %>
+  <%= form_with model: @user, url: signup_path do |f| %>
+    <div>
+      <%= f.label :name, "名前" %>
+      <%= f.text_field :name %>
+    </div>
+    <div>
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.email_field :email %>
+    </div>
+    <div>
+      <%= f.label :password, "パスワード" %>
+      <%= f.password_field :password %>
+    </div>
+    <div>
+      <%= f.label :password_confirmation, "確認用パスワード" %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <%= f.submit "登録する" %>
+  <% end %>
 
-<%= link_to "ログインはこちら", login_path %>
+  <p style="margin-top: 16px; text-align: center;">
+    すでにアカウントをお持ちの方は<%= link_to "ログイン", login_path %>
+  </p>
+</div>

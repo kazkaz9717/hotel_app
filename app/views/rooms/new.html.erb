@@ -1,6 +1,6 @@
 <h1>施設登録</h1>
 
-<%= form_with model: @room do |f| %>
+<%= form_with model: @room, multipart: true do |f| %>
   <div>
     <%= f.label :name, "施設名" %>
     <%= f.text_field :name %>
@@ -18,8 +18,8 @@
     <%= f.text_field :address %>
   </div>
   <div>
-    <%= f.label :room_image, "施設画像URL" %>
-    <%= f.text_field :room_image %>
+    <%= f.label :room_image, "施設画像" %>
+    <%= f.file_field :room_image %>
   </div>
   <%= f.submit "登録する" %>
 <% end %>

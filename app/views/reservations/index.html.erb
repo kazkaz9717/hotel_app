@@ -2,7 +2,7 @@
 
 <% @reservations.each do |reservation| %>
   <div>
-    <% if reservation.room.room_image.present? %>
+    <% if reservation.room.room_image.attached? %>
       <%= image_tag reservation.room.room_image %>
     <% else %>
       <%= image_tag "default_room.png" %>

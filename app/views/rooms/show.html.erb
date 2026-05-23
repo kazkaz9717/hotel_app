@@ -1,6 +1,6 @@
 <h1><%= @room.name %></h1>
 
-<% if @room.room_image.present? %>
+<% if @room.room_image.attached? %>
   <%= image_tag @room.room_image %>
 <% else %>
   <%= image_tag "default_room.png" %>

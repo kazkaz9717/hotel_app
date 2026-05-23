@@ -13,3 +13,174 @@
  *= require_tree .
  *= require_self
  */
+
+/* リセット */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    color: #333;
+    background-color: #f8f8f8;
+}
+
+/* ヘッダー */
+header {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 12px 24px;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+header nav a:first-child {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e74c3c;
+    text-decoration: none;
+    margin-right: auto;
+}
+
+/* リンク */
+a {
+    color: #e74c3c;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* メイン */
+main {
+    max-width: 1100px;
+    margin: 32px auto;
+    padding: 0 24px;
+}
+
+/* ボタン */
+input[type="submit"] {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+input[type="submit"]:hover {
+    background-color: #c0392b;
+}
+
+/* フォーム */
+form div {
+    margin-bottom: 16px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="number"],
+form input[type="date"],
+form textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* カード */
+.card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+/* フラッシュメッセージ */
+.notice {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+/* 施設一覧 */
+.room-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.room-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.room-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.room-info {
+    padding: 12px;
+}
+
+.room-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* 認証ページ */
+.auth-container {
+    max-width: 480px;
+    margin: 60px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.auth-container h1 {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.auth-container input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    margin-top: 8px;
+}

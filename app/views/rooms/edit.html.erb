@@ -1,6 +1,13 @@
 <h1>施設編集</h1>
 
-<%= form_with model: @room do |f| %>
+<%= form_with model: @room, multipart: true do |f| %>
+  <div>
+    <% if @room.room_image.attached? %>
+      <%= image_tag @room.room_image, style: "width: 200px; height: 150px; object-fit: cover;" %>
+    <% else %>
+      <%= image_tag "default_room.png", style: "width: 200px; height: 150px; object-fit: cover;" %>
+    <% end %>
+  </div>
   <div>
     <%= f.label :name, "施設名" %>
     <%= f.text_field :name %>
@@ -18,8 +25,8 @@
     <%= f.text_field :address %>
   </div>
   <div>
-    <%= f.label :room_image, "施設画像URL" %>
-    <%= f.text_field :room_image %>
+    <%= f.label :room_image, "施設画像" %>
+    <%= f.file_field :room_image %>
   </div>
   <%= f.submit "更新する" %>
 <% end %>

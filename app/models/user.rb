@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :reservations, dependent: :destroy
 
   has_secure_password
+  has_one_attached :icon_image
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
