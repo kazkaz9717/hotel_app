@@ -9,12 +9,17 @@
 <p><%= @room.description %></p>
 <p>¥<%= @room.price %>/日</p>
 
-<div style="display:flex; gap:12px; margin-top:16px;">
+<div style="display:flex; gap:12px; margin-top:16px; justify-content:space-between;">
+  <div style="display:flex; gap:12px;">
+    <%= link_to "予約する", new_reservation_path(room_id: @room.id), style: "background:#e74c3c; color:white; padding:8px 20px; border-radius:4px;" %>
+    <%= link_to "戻る", search_rooms_path, style: "background:#888; color:white; padding:8px 20px; border-radius:4px;" %>
+  </div>
   <% if logged_in? && @room.user == current_user %>
-    <%= link_to "編集する", edit_room_path(@room), style: "background:#e74c3c; color:white; padding:8px 20px; border-radius:4px;" %>
-    <button onclick="document.getElementById('delete-modal').style.display='flex'" style="background:#e74c3c; color:white; padding:8px 20px; border-radius:4px; border:none; cursor:pointer;">削除する</button>
+    <div style="display:flex; gap:12px;">
+      <%= link_to "編集する", edit_room_path(@room), style: "background:#e74c3c; color:white; padding:8px 20px; border-radius:4px;" %>
+      <button onclick="document.getElementById('delete-modal').style.display='flex'" style="background:#e74c3c; color:white; padding:8px 20px; border-radius:4px; border:none; cursor:pointer; font-size:1rem;">削除する</button>
+    </div>
   <% end %>
-  <%= link_to "戻る", rooms_path, style: "background:#888; color:white; padding:8px 20px; border-radius:4px;" %>
 </div>
 
 <!-- 削除確認モーダル -->

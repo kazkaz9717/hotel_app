@@ -25,7 +25,8 @@
     <%= f.label :guests, "人数" %>
     <%= f.number_field :guests %>
   </div>
-  <%= f.submit "確認する" %>
+  <div style="display:flex; gap:12px; margin-top:8px;">
+    <%= f.submit "確認する" %>
+    <%= link_to "戻る", room_path(@room), style: "background:#888; color:white; padding:8px 20px; border-radius:4px;" %>
+  </div>
 <% end %>
-
-<%= link_to "戻る", room_path(@room) %>

@@ -29,8 +29,9 @@
       <%= f.label :bio, "自己紹介" %>
       <%= f.text_area :bio %>
     </div>
-    <%= f.submit "更新する" %>
+    <div style="margin-top:8px;">
+      <%= f.submit "更新する", style: "width:80%; display:block; margin:0 auto 8px;" %>
+      <a href="<%= account_users_path %>" style="display:block; width:80%; margin:0 auto; background:#888; color:white; border-radius:4px; text-align:center; padding:8px 20px; font-size:14px; box-sizing:border-box;">戻る</a>
+    </div>
   <% end %>
-
-  <%= link_to "戻る", account_users_path %>
 </div>

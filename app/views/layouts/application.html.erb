@@ -31,11 +31,11 @@
                 <span onclick="document.getElementById('dropdown').style.display = document.getElementById('dropdown').style.display === 'none' ? 'block' : 'none'" style="cursor: pointer;">
                   <%= current_user.name %>
                 </span>
-                <div id="dropdown" style="display: none; position: absolute; background: white; border: 1px solid #ccc; padding: 10px;">
-                  <%= link_to "アカウント", account_users_path %><br>
-                  <%= link_to "施設一覧", rooms_path %><br>
-                  <%= link_to "予約一覧", reservations_path %><br>
-                  <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete } %>
+                <div id="dropdown" style="display:none; position:absolute; right:0; background:white; border:1px solid #ddd; border-radius:8px; padding:8px 0; min-width:160px; box-shadow:0 4px 12px rgba(0,0,0,0.1); z-index:100;">
+                  <%= link_to "アカウント設定", account_users_path, style: "display:block; padding:10px 16px; color:#333; white-space:nowrap;" %>
+                  <%= link_to "登録施設一覧", rooms_path, style: "display:block; padding:10px 16px; color:#333; white-space:nowrap;" %>
+                  <%= link_to "予約済み一覧", reservations_path, style: "display:block; padding:10px 16px; color:#333; white-space:nowrap;" %>
+                  <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, style: "display:block; padding:10px 16px; color:#e74c3c; white-space:nowrap;" %>
                 </div>
               </div>
             <% else %>
@@ -48,10 +48,9 @@
 
     <main>
       <% if notice %>
-        <p><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p><%= alert %></p>
+        <div style="background:#d4edda; color:#155724; padding:12px; border-radius:4px; margin-bottom:16px;">
+          <%= notice %>
+        </div>
       <% end %>
       <%= yield %>
     </main>

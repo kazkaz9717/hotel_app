@@ -1,6 +1,12 @@
 <div class="auth-container">
   <h1>アカウント情報の編集</h1>
 
+  <% if flash[:alert] %>
+    <div style="background:#f8d7da; color:#721c24; padding:12px; border-radius:4px; margin-bottom:16px;">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
   <% if @user.errors.any? %>
     <div style="background:#f8d7da; color:#721c24; padding:12px; border-radius:4px; margin-bottom:16px;">
       <% @user.errors.full_messages.each do |message| %>
@@ -15,6 +21,10 @@
       <%= f.email_field :email %>
     </div>
     <div>
+      <%= label_tag :current_password, "現在のパスワード" %>
+      <%= password_field_tag :current_password %>
+    </div>
+    <div>
       <%= f.label :password, "パスワード" %>
       <%= f.password_field :password %>
     </div>
@@ -22,8 +32,9 @@
       <%= f.label :password_confirmation, "確認用パスワード" %>
       <%= f.password_field :password_confirmation %>
     </div>
-    <%= f.submit "更新する" %>
+    <div style="margin-top:8px;">
+      <%= f.submit "更新する", style: "width:80%; display:block; margin:0 auto 8px;" %>
+      <a href="<%= account_users_path %>" style="display:block; width:80%; margin:0 auto; background:#888; color:white; border-radius:4px; text-align:center; padding:8px 20px; font-size:14px; box-sizing:border-box;">戻る</a>
+    </div>
   <% end %>
-
-  <%= link_to "戻る", account_users_path %>
 </div>

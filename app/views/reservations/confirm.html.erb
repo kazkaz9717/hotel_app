@@ -11,7 +11,8 @@
   <%= hidden_field_tag "reservation[check_in]", @reservation.check_in %>
   <%= hidden_field_tag "reservation[check_out]", @reservation.check_out %>
   <%= hidden_field_tag "reservation[guests]", @reservation.guests %>
-  <%= f.submit "予約を確定する" %>
+  <div style="display:flex; gap:12px; margin-top:8px;">
+    <%= f.submit "予約を確定する" %>
+    <%= link_to "戻る", new_reservation_path(room_id: @room.id), style: "background:#888; color:white; padding:8px 20px; border-radius:4px;" %>
+  </div>
 <% end %>
-
-<%= link_to "戻る", new_reservation_path(room_id: @room.id) %>

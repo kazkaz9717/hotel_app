@@ -1,12 +1,22 @@
-<h1>検索結果</h1>
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+  <h1>検索結果</h1>
+  <p>検索結果：<%= @count %>件</p>
+</div>
 
-<p>検索結果：<%= @count %>件</p>
-
-<% @rooms.each do |room| %>
-  <div>
-    <%= link_to room.name, room_path(room) %>
-    <p><%= room.address %></p>
-    <p><%= room.description %></p>
-    <p>¥<%= room.price %>/日</p>
-  </div>
-<% end %>
+<div class="room-grid">
+  <% @rooms.each do |room| %>
+    <div class="room-card">
+      <% if room.room_image.attached? %>
+        <%= image_tag room.room_image, class: "room-image" %>
+      <% else %>
+        <%= image_tag "default_room.png", class: "room-image" %>
+      <% end %>
+      <div class="room-info">
+        <%= link_to room.name, room_path(room), class: "room-name" %>
+        <p><%= room.address %></p>
+        <p><%= room.description %></p>
+        <p>¥<%= room.price %>/日</p>
+      </div>
+    </div>
+  <% end %>
+</div>
