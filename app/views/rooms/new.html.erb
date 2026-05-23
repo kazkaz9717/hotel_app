@@ -1,5 +1,13 @@
 <h1>施設登録</h1>
 
+<% if @room.errors.any? %>
+  <div style="background:#f8d7da; color:#721c24; padding:12px; border-radius:4px; margin-bottom:16px;">
+    <% @room.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+  </div>
+<% end %>
+
 <%= form_with model: @room, multipart: true do |f| %>
   <div>
     <%= f.label :name, "施設名" %>

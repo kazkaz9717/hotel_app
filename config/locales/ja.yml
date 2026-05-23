@@ -5,3 +5,16 @@ ja:
         check_in: "チェックイン日"
         check_out: "チェックアウト日"
         guests: "人数"
+      room:
+        name: "施設名"
+        description: "施設詳細"
+        price: "料金"
+        address: "住所"
+  errors:
+    messages:
+      blank: "を入力してください"
+      taken: "はすでに使用されています"
+      too_short: "は%{count}文字以上で入力してください"
+      not_a_number: "は数値で入力してください"
+      greater_than_or_equal_to: "は%{count}円以上の金額を入力してください"
+      invalid: "は不正な値です"
