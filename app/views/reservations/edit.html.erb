@@ -1,0 +1,31 @@
+<h1>予約編集</h1>
+
+<h2><%= @room.name %></h2>
+<p>¥<%= @room.price %>/日</p>
+
+<% if @reservation.errors.any? %>
+  <div style="background:#f8d7da; color:#721c24; padding:12px; border-radius:4px; margin-bottom:16px;">
+    <% @reservation.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+  </div>
+<% end %>
+
+<%= form_with model: @reservation, data: { turbo: false } do |f| %>
+  <div>
+    <%= f.label :check_in, "チェックイン日" %>
+    <%= f.date_field :check_in %>
+  </div>
+  <div>
+    <%= f.label :check_out, "チェックアウト日" %>
+    <%= f.date_field :check_out %>
+  </div>
+  <div>
+    <%= f.label :guests, "人数" %>
+    <%= f.number_field :guests %>
+  </div>
+  <div style="display:flex; gap:12px; margin-top:8px;">
+    <%= f.submit "更新する" %>
+    <%= link_to "戻る", reservation_path(@reservation), style: "background:#888; color:white; padding:8px 20px; border-radius:4px;" %>
+  </div>
+<% end %>

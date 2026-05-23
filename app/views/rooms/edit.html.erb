@@ -28,7 +28,8 @@
     <%= f.label :room_image, "施設画像" %>
     <%= f.file_field :room_image %>
   </div>
-  <%= f.submit "更新する" %>
+  <div style="display:flex; gap:12px; margin-top:8px;">
+    <%= f.submit "更新する" %>
+    <%= link_to "戻る", room_path(@room), style: "background:#888; color:white; padding:8px 20px; border-radius:4px;" %>
+  </div>
 <% end %>
-
-<%= link_to "戻る", room_path(@room) %>

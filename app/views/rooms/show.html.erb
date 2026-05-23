@@ -1,21 +1,21 @@
 <h1><%= @room.name %></h1>
 
 <% if @room.room_image.attached? %>
-  <%= image_tag @room.room_image %>
+  <%= image_tag @room.room_image, style: "width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px;" %>
 <% else %>
-  <%= image_tag "default_room.png" %>
+  <%= image_tag "default_room.png", style: "width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px;" %>
 <% end %>
 
 <p><%= @room.description %></p>
 <p>¥<%= @room.price %>/日</p>
 
-<% if logged_in? && @room.user == current_user %>
-  <%= link_to "編集する", edit_room_path(@room) %>
-  <button onclick="document.getElementById('delete-modal').style.display='flex'">削除する</button>
-<% end %>
-
-<%= link_to "予約する", new_reservation_path(room_id: @room.id) %>
-<%= link_to "戻る", :back %>
+<div style="display:flex; gap:12px; margin-top:16px;">
+  <% if logged_in? && @room.user == current_user %>
+    <%= link_to "編集する", edit_room_path(@room), style: "background:#e74c3c; color:white; padding:8px 20px; border-radius:4px;" %>
+    <button onclick="document.getElementById('delete-modal').style.display='flex'" style="background:#e74c3c; color:white; padding:8px 20px; border-radius:4px; border:none; cursor:pointer;">削除する</button>
+  <% end %>
+  <%= link_to "戻る", rooms_path, style: "background:#888; color:white; padding:8px 20px; border-radius:4px;" %>
+</div>
 
 <!-- 削除確認モーダル -->
 <div id="delete-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
@@ -30,7 +30,7 @@
     <% end %>
     <div style="margin-top:24px; display:flex; gap:16px;">
       <%= link_to "削除する", room_path(@room), data: { turbo_method: :delete }, style: "background:#e74c3c; color:white; padding:8px 20px; border-radius:4px;" %>
-      <button onclick="document.getElementById('delete-modal').style.display='none'">キャンセル</button>
+      <button onclick="document.getElementById('delete-modal').style.display='none'" style="background:#888; color:white; padding:8px 20px; border-radius:4px; border:none; cursor:pointer;">キャンセル</button>
     </div>
   </div>
 </div>

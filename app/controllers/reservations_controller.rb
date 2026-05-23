@@ -5,6 +5,25 @@ class ReservationsController < ApplicationController
     @reservations = current_user.reservations.includes(:room)
   end
 
+  def show
+    @reservation = current_user.reservations.find(params[:id])
+  end
+
+  def edit
+    @reservation = current_user.reservations.find(params[:id])
+    @room = @reservation.room
+  end
+
+  def update
+    @reservation = current_user.reservations.find(params[:id])
+    @room = @reservation.room
+    if @reservation.update(reservation_params)
+      redirect_to reservation_path(@reservation), notice: "予約を更新しました"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def new
     @room = Room.find(params[:room_id])
     @reservation = Reservation.new

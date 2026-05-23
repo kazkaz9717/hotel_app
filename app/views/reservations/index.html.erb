@@ -1,19 +1,25 @@
-<h1>予約一覧</h1>
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+  <h1>予約一覧</h1>
+  <%= link_to "施設を予約する", search_rooms_path, style: "background:#e74c3c; color:white; padding:8px 20px; border-radius:4px; text-decoration:none;" %>
+</div>
 
-<% @reservations.each do |reservation| %>
-  <div>
-    <% if reservation.room.room_image.attached? %>
-      <%= image_tag reservation.room.room_image %>
-    <% else %>
-      <%= image_tag "default_room.png" %>
-    <% end %>
-    <p><%= reservation.room.name %></p>
-    <p><%= reservation.room.description %></p>
-    <% nights = (reservation.check_out - reservation.check_in).to_i %>
-    <p>合計料金：¥<%= reservation.room.price * nights * reservation.guests %></p>
-    <p>チェックイン：<%= reservation.check_in.strftime("%Y/%m/%d") %></p>
-    <p>チェックアウト：<%= reservation.check_out.strftime("%Y/%m/%d") %></p>
-    <p>予約確定日時：<%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></p>
-    <%= link_to "削除", reservation_path(reservation), data: { turbo_method: :delete, turbo_confirm: "予約を削除しますか？" } %>
-  </div>
-<% end %>
+<div class="room-grid">
+  <% @reservations.each do |reservation| %>
+    <div class="room-card">
+      <% if reservation.room.room_image.attached? %>
+        <%= image_tag reservation.room.room_image, class: "room-image" %>
+      <% else %>
+        <%= image_tag "default_room.png", class: "room-image" %>
+      <% end %>
+      <div class="room-info">
+        <%= link_to reservation.room.name, reservation_path(reservation), class: "room-name" %>
+        <p><%= reservation.room.description %></p>
+        <% nights = (reservation.check_out - reservation.check_in).to_i %>
+        <p>合計料金：¥<%= reservation.room.price * nights * reservation.guests %></p>
+        <p>チェックイン：<%= reservation.check_in.strftime("%Y/%m/%d") %></p>
+        <p>チェックアウト：<%= reservation.check_out.strftime("%Y/%m/%d") %></p>
+        <p>予約確定日時：<%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
