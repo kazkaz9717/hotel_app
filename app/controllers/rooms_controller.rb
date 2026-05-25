@@ -24,6 +24,9 @@ class RoomsController < ApplicationController
   end
 
   def show
+    unless request.referrer&.include?('/reservations')
+      session[:return_to] = request.referrer
+    end
   end
 
   def edit

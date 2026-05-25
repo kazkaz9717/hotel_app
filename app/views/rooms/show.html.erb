@@ -12,7 +12,7 @@
 <div style="display:flex; gap:12px; margin-top:16px; justify-content:space-between;">
   <div style="display:flex; gap:12px;">
     <%= link_to "予約する", new_reservation_path(room_id: @room.id), style: "background:#e74c3c; color:white; padding:8px 20px; border-radius:4px;" %>
-    <%= link_to "戻る", search_rooms_path, style: "background:#888; color:white; padding:8px 20px; border-radius:4px;" %>
+    <%= link_to "戻る", session[:return_to] || search_rooms_path, style: "background:#888; color:white; padding:8px 20px; border-radius:4px;" %>
   </div>
   <% if logged_in? && @room.user == current_user %>
     <div style="display:flex; gap:12px;">
