@@ -1,6 +1,16 @@
+<div style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600') center/cover; min-height: 400px; display:flex; flex-direction:column; justify-content:center; align-items:center; margin: -32px -24px 32px; padding: 60px 24px; text-align:center;">
+  <h1 style="color:white; font-size:36px; margin-bottom:8px;">あなたにぴったりの宿を見つけよう</h1>
+  <p style="color:rgba(255,255,255,0.8); margin-bottom:32px; font-size:16px;">全国の宿泊施設を検索できます</p>
+
+  <%= form_with url: search_rooms_path, method: :get, style: "background:white; padding:16px; border-radius:8px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center; width:100%; max-width:700px;" do |f| %>
+    <%= f.select :area, [["エリアを選択", ""], ["東京", "東京"], ["大阪", "大阪"], ["京都", "京都"], ["札幌", "札幌"]], {}, style: "padding:10px; border:1px solid #ddd; border-radius:4px; font-size:14px;" %>
+    <%= f.text_field :keyword, placeholder: "フリーワード検索", style: "flex:1; padding:10px; border:1px solid #ddd; border-radius:4px; font-size:14px; min-width:200px;" %>
+    <%= f.submit "検索", style: "padding:10px 24px; background:#e74c3c; color:white; border:none; border-radius:4px; cursor:pointer; font-size:14px;" %>
+  <% end %>
+</div>
+
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
-  <h1>検索結果</h1>
-  <p>検索結果：<%= @count %>件</p>
+  <h2>施設一覧<% if @count %><span style="font-size:16px; color:#888; margin-left:12px;"><%= @count %>件</span><% end %></h2>
 </div>
 
 <div class="room-grid">

@@ -2,7 +2,7 @@ class ReservationsController < ApplicationController
   before_action :require_login
 
   def index
-    @reservations = current_user.reservations.includes(:room)
+    @reservations = current_user.reservations.includes(:room).order(check_in: :asc)
   end
 
   def show
