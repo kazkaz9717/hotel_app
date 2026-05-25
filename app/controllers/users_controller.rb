@@ -43,7 +43,10 @@ class UsersController < ApplicationController
   def update_account
     @user = current_user
     if @user.authenticate(params[:current_password])
-      if @user.update(account_params)
+      if params[:user][:password].blank?
+        @user.errors.add(:password, "を入力してください")
+        render :edit_account, status: :unprocessable_entity
+      elsif @user.update(account_params)
         redirect_to account_users_path, notice: "アカウント情報を更新しました"
       else
         render :edit_account, status: :unprocessable_entity
