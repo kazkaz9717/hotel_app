@@ -13,9 +13,9 @@
       <% end %>
       <div class="room-info">
         <%= link_to room.name, room_path(room), class: "room-name" %>
-        <p><%= room.description %></p>
-        <p>宿泊費：¥<%= number_with_delimiter(room.price) %>/日</p>
-        <p>登録日：<%= room.created_at.strftime("%Y/%m/%d") %></p>
+        <p class="room-description"><%= room.description %></p>
+        <p class="room-price">¥<%= number_with_delimiter(room.price) %>/日</p>
+        <p class="room-date"><%= room.created_at.strftime("%Y/%m/%d") %></p>
       </div>
     </div>
   <% end %>

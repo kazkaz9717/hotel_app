@@ -45,14 +45,14 @@ header nav {
 header nav a:first-child {
     font-size: 20px;
     font-weight: bold;
-    color: #e74c3c;
+    color: #c0392b;
     text-decoration: none;
     margin-right: auto;
 }
 
 /* リンク */
 a {
-    color: #e74c3c;
+    color: #c0392b;
     text-decoration: none;
 }
 
@@ -80,6 +80,7 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #c0392b;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.3);
 }
 
 /* フォーム */
@@ -142,7 +143,7 @@ form textarea {
 }
 
 .room-card {
-    background: white;
+    background: #f8f5f0;
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid #ddd;
@@ -155,12 +156,13 @@ form textarea {
 }
 
 .room-info {
-    padding: 12px;
+    padding: 16px;
 }
 
 .room-name {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
+    color: #c0392b;
 }
 
 /* 認証ページ */
@@ -183,4 +185,32 @@ form textarea {
     padding: 12px;
     font-size: 16px;
     margin-top: 8px;
+}
+
+/* 紹介文 */
+.room-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #666;
+    font-size: 14px;
+    margin: 4px 0 8px;
+}
+
+/* 施設情報 */
+.room-address {
+    color: #888;
+    font-size: 13px;
+}
+
+.room-price {
+    color: #ed6d46;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.room-date {
+    color: #888;
+    font-size: 13px;
 }
