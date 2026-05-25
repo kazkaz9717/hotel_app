@@ -1,5 +1,5 @@
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
-  <h1>予約一覧</h1>
+  <h1>予約施設一覧</h1>
   <%= link_to "施設を予約する", search_rooms_path, style: "background:#e74c3c; color:white; padding:8px 20px; border-radius:4px; text-decoration:none;" %>
 </div>
 
@@ -15,7 +15,7 @@
         <%= link_to reservation.room.name, reservation_path(reservation), class: "room-name" %>
         <p><%= reservation.room.description %></p>
         <% nights = (reservation.check_out - reservation.check_in).to_i %>
-        <p>合計料金：¥<%= reservation.room.price * nights * reservation.guests %></p>
+        <p>合計料金：¥<%= number_with_delimiter(reservation.room.price * nights * reservation.guests) %></p>
         <p>チェックイン：<%= reservation.check_in.strftime("%Y/%m/%d") %></p>
         <p>チェックアウト：<%= reservation.check_out.strftime("%Y/%m/%d") %></p>
         <p>予約確定日時：<%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></p>

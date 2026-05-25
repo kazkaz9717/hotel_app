@@ -4,7 +4,7 @@
 <p>チェックアウト日：<%= @reservation.check_out.strftime("%Y/%m/%d") %></p>
 <p>宿泊日数：<%= (@reservation.check_out - @reservation.check_in).to_i %>泊</p>
 <p>人数：<%= @reservation.guests %>人</p>
-<p>支払い金額：¥<%= @total_price %></p>
+<p>支払い金額：¥<%= number_with_delimiter(@total_price) %></p>
 
 <%= form_with url: reservations_path, data: { turbo: false } do |f| %>
   <%= hidden_field_tag :room_id, @room.id %>

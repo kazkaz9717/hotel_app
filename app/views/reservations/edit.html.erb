@@ -1,7 +1,7 @@
 <h1>予約編集</h1>
 
 <h2><%= @room.name %></h2>
-<p>¥<%= @room.price %>/日</p>
+<p>¥<%= number_with_delimiter(@room.price) %>/日</p>
 
 <% if @reservation.errors.any? %>
   <div style="background:#f8d7da; color:#721c24; padding:12px; border-radius:4px; margin-bottom:16px;">
