@@ -10,27 +10,27 @@
   </head>
 
   <body>
-    <header style="background-color:#2c3e50; padding:16px 24px;">
-      <nav style="display:flex; align-items:center; justify-content:space-between; max-width:1100px; margin:0 auto;">
-        <%= link_to "HotelApp", root_path, style: "font-size:32px; font-weight:bold; color:white; text-decoration:none;" %>
+    <header>
+      <nav>
+        <%= link_to "HotelApp", root_path, class: "site-logo" %>
         <div>
           <% if logged_in? %>
             <div style="position:relative; display:inline-block;">
-              <div onclick="document.getElementById('dropdown').style.display = document.getElementById('dropdown').style.display === 'none' ? 'block' : 'none'" style="cursor:pointer; display:flex; align-items:center; gap:8px;">
+              <div class="dropdown-trigger" onclick="document.getElementById('dropdown').style.display = document.getElementById('dropdown').style.display === 'none' ? 'block' : 'none'">
                 <%= icon_image_tag(current_user, style: "width:40px; height:40px; border-radius:50%; object-fit:cover;") %>
-                <span style="color:white; font-size:16px;"><%= current_user.name %></span>
-                <span style="color:white; font-size:12px;">▼</span>
+                <span class="dropdown-name"><%= current_user.name %></span>
+                <span class="dropdown-arrow">▼</span>
               </div>
-              <div id="dropdown" style="display:none; position:absolute; right:0; background:white; border:1px solid #ddd; border-radius:8px; padding:8px 0; min-width:160px; box-shadow:0 4px 12px rgba(0,0,0,0.1); z-index:100;">
-                <%= link_to "アカウント設定", account_users_path, style: "display:block; padding:10px 16px; color:#333; white-space:nowrap;" %>
-                <%= link_to "登録施設一覧", rooms_path, style: "display:block; padding:10px 16px; color:#333; white-space:nowrap;" %>
-                <%= link_to "予約施設一覧", reservations_path, style: "display:block; padding:10px 16px; color:#333; white-space:nowrap;" %>
-                <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, style: "display:block; padding:10px 16px; color:#e74c3c; white-space:nowrap;" %>
+              <div id="dropdown" class="dropdown-menu">
+                <%= link_to "アカウント設定", account_users_path, class: "dropdown-item" %>
+                <%= link_to "登録施設一覧", rooms_path, class: "dropdown-item" %>
+                <%= link_to "予約施設一覧", reservations_path, class: "dropdown-item" %>
+                <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class: "dropdown-item-danger" %>
               </div>
             </div>
           <% else %>
-            <%= link_to "ログイン", login_path, style: "color:white; margin-right:16px;" %>
-            <%= link_to "新規登録", signup_path, style: "background:#e74c3c; color:white; padding:8px 16px; border-radius:4px;" %>
+            <%= link_to "ログイン", login_path, class: "dropdown-name" %>
+            <%= link_to "新規登録", signup_path, class: "btn-primary" %>
           <% end %>
         </div>
       </nav>
@@ -38,7 +38,7 @@
 
     <main>
       <% if notice %>
-        <div id="flash-notice" style="position:fixed; top:85PX; left:50%; transform:translateX(-50%); background:#d4edda; color:#155724; padding:12px 24px; border-radius:4px; z-index:1000; box-shadow:0 2px 8px rgba(0,0,0,0.15);">
+        <div id="flash-notice" style="position:fixed; top:85px; left:50%; transform:translateX(-50%); background:#d4edda; color:#155724; padding:12px 24px; border-radius:4px; z-index:1000; box-shadow:0 2px 8px rgba(0,0,0,0.15);">
           <%= notice %>
         </div>
         <script>
