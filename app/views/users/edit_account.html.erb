@@ -1,0 +1,52 @@
+<div class="auth-container">
+  <h1>アカウント情報の編集</h1>
+
+  <% if flash[:alert] %>
+    <div class="alert">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <% if @user.errors.any? %>
+    <div class="alert">
+      <% @user.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= form_with model: @user, url: update_account_users_path, method: :patch do |f| %>
+    <div>
+      <%= f.label :email do %>
+        <span style="color:red;">*</span>
+        メールアドレス
+      <% end %>
+      <%= f.email_field :email %>
+    </div>
+    <div>
+      <%= label_tag :current_password do %>
+        <span style="color:red;">*</span>
+        現在のパスワード
+      <% end %>
+      <%= password_field_tag :current_password %>
+    </div>
+    <div>
+      <%= f.label :password do %>
+        <span style="color:red;">*</span>
+        パスワード
+      <% end %>
+      <%= f.password_field :password %>
+    </div>
+    <div>
+      <%= f.label :password_confirmation do %>
+        <span style="color:red;">*</span>
+        確認用パスワード
+      <% end %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <div style="margin-top:8px;">
+      <%= f.submit "更新する", style: "width:80%; display:block; margin:0 auto 8px;" %>
+      <a href="<%= account_users_path %>" style="display:block; width:80%; margin:0 auto; background:#888; color:white; border-radius:4px; text-align:center; padding:8px 20px; font-size:14px; box-sizing:border-box;">戻る</a>
+    </div>
+  <% end %>
+</div>

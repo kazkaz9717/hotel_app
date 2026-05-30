@@ -1,0 +1,61 @@
+<div style="max-width:600px; margin:0 auto;">
+  <h1 style="text-align:center;">予約内容のご確認</h1>
+
+  <table style="width:100%; border-collapse:collapse; margin:24px 0;">
+    <tr style="border-bottom:1px solid #ddd;">
+      <td style="padding:16px 0; font-weight:bold;">チェックイン</td>
+      <td style="padding:16px 0; text-align:right;"><%= @reservation.check_in.strftime("%Y/%m/%d") %></td>
+    </tr>
+    <tr style="border-bottom:1px solid #ddd;">
+      <td style="padding:16px 0; font-weight:bold;">チェックアウト</td>
+      <td style="padding:16px 0; text-align:right;"><%= @reservation.check_out.strftime("%Y/%m/%d") %></td>
+    </tr>
+    <tr style="border-bottom:1px solid #ddd;">
+      <td style="padding:16px 0; font-weight:bold;">日数</td>
+      <td style="padding:16px 0; text-align:right;"><%= (@reservation.check_out - @reservation.check_in).to_i %>泊</td>
+    </tr>
+    <tr style="border-bottom:1px solid #ddd;">
+      <td style="padding:16px 0; font-weight:bold;">人数</td>
+      <td style="padding:16px 0; text-align:right;"><%= @reservation.guests %>人</td>
+    </tr>
+    <tr>
+      <td style="padding:16px 0; font-weight:bold;">お支払い金額</td>
+      <td style="padding:16px 0; text-align:right; font-weight:bold; color:#c0392b; font-size:20px;">¥<%= number_with_delimiter(@total_price) %></td>
+    </tr>
+  </table>
+
+  <%= form_with url: reservations_path, data: { turbo: false } do |f| %>
+    <%= hidden_field_tag :room_id, @room.id %>
+    <%= hidden_field_tag "reservation[check_in]", @reservation.check_in %>
+    <%= hidden_field_tag "reservation[check_out]", @reservation.check_out %>
+    <%= hidden_field_tag "reservation[guests]", @reservation.guests %>
+
+    <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:16px;">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <input type="checkbox" id="confirm_check">
+        <label for="confirm_check">上記予約内容を確認しました。</label>
+      </div>
+      <span id="check-error" style="color:#c0392b; visibility:hidden; height:24px; margin-top:8px;">
+        ※チェックを入れてください。
+      </span>
+    </div>
+
+    <div class="form-actions">
+      <%= link_to "戻る", new_reservation_path(room_id: @room.id), class: "btn-secondary" %>
+      <%= f.submit "上記の内容で予約", id: "submit_btn" %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelector('form').addEventListener('submit', function(e) {
+    if (!document.getElementById('confirm_check').checked) {
+      e.preventDefault();
+      document.getElementById('check-error').style.visibility = 'visible';
+    } else {
+      document.getElementById('check-error').style.visibility = 'hidden';
+    }
+  });
+});
+</script>

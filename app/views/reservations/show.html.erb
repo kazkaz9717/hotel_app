@@ -1,0 +1,46 @@
+<div style="max-width:600px; margin:0 auto;">
+  <h1>予約詳細</h1>
+
+  <div class="room-card">
+    <%= room_image_tag(@reservation.room, class: "room-image") %>
+    <div class="room-info">
+      <p class="room-name"><%= @reservation.room.name %></p>
+      <p><%= @reservation.room.description %></p>
+      <% nights = (@reservation.check_out - @reservation.check_in).to_i %>
+      <p>合計料金：¥<%= number_with_delimiter(@reservation.room.price * nights * @reservation.guests) %></p>
+      <p>チェックイン：<%= @reservation.check_in.strftime("%Y/%m/%d") %></p>
+      <p>チェックアウト：<%= @reservation.check_out.strftime("%Y/%m/%d") %></p>
+      <p>宿泊料金：¥<%= number_with_delimiter(@reservation.room.price) %>/日</p>
+      <p>宿泊日数：<%= nights %>泊</p>
+      <p>人数：<%= @reservation.guests %>人</p>
+      <p>予約確定日時：<%= @reservation.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= link_to "戻る", reservations_path, class: "btn-secondary" %>
+    <% if @reservation.check_out >= Date.today %>
+      <div style="display:flex; gap:12px;">
+        <%= link_to "変更する", edit_reservation_path(@reservation), class: "btn-primary" %>
+        <%= link_to "削除する", "#", onclick: "document.getElementById('delete-modal').style.display='flex'; return false;", class: "btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- 削除確認モーダル -->
+  <div id="delete-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h2>予約を削除しますか？</h2>
+      <%= room_image_tag(@reservation.room, style: "width: 200px; height: 150px; object-fit: cover;") %>
+      <p class="room-name"><%= @reservation.room.name %></p>
+      <p class="room-price">¥<%= number_with_delimiter(@reservation.room.price) %>/日</p>
+      <p>チェックイン：<%= @reservation.check_in.strftime("%Y/%m/%d") %></p>
+      <p>チェックアウト：<%= @reservation.check_out.strftime("%Y/%m/%d") %></p>
+      <p>人数：<%= @reservation.guests %>人</p>
+      <div class="modal-buttons">
+        <%= link_to "戻る", "#", onclick: "document.getElementById('delete-modal').style.display='none'; return false;", class: "btn-secondary" %>
+        <%= link_to "削除する", reservation_path(@reservation), data: { turbo_method: :delete }, class: "btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>

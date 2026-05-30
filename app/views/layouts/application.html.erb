@@ -1,23 +1,74 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Hotel App" %></title>
+    <title>HotelApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= yield :head %>
-
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <nav>
+        <%= link_to "HotelApp", root_path, class: "site-logo" %>
+        <div>
+          <% if logged_in? %>
+            <div style="position:relative; display:inline-block;">
+              <div class="dropdown-trigger" onclick="document.getElementById('dropdown').style.display = document.getElementById('dropdown').style.display === 'none' ? 'block' : 'none'">
+                <%= icon_image_tag(current_user, style: "width:40px; height:40px; border-radius:50%; object-fit:cover;") %>
+                <span class="dropdown-name"><%= current_user.name %></span>
+                <span class="dropdown-arrow">▼</span>
+              </div>
+              <div id="dropdown" class="dropdown-menu">
+                <%= link_to "アカウント設定", account_users_path, class: "dropdown-item" %>
+                <%= link_to "登録施設一覧", rooms_path, class: "dropdown-item" %>
+                <%= link_to "予約施設一覧", reservations_path, class: "dropdown-item" %>
+                <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class: "dropdown-item-danger" %>
+              </div>
+            </div>
+          <% else %>
+            <%= link_to "ログイン", login_path, class: "dropdown-name" %>
+            <%= link_to "新規登録", signup_path, class: "btn-primary" %>
+          <% end %>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <% if notice %>
+        <div id="flash-notice" style="position:fixed; top:85px; left:50%; transform:translateX(-50%); background:#d4edda; color:#155724; padding:12px 24px; border-radius:4px; z-index:1000; box-shadow:0 2px 8px rgba(0,0,0,0.15);">
+          <%= notice %>
+        </div>
+        <script>
+          setTimeout(function() {
+            const el = document.getElementById('flash-notice');
+            if (el) {
+              el.style.transition = 'opacity 1s';
+              el.style.opacity = '0';
+              setTimeout(function() { el.remove(); }, 1000);
+            }
+          }, 3000);
+        </script>
+      <% end %>
+
+      <% if alert %>
+        <div id="flash-alert" style="position:fixed; top:85px; left:50%; transform:translateX(-50%); background:#f8d7da; color:#721c24; padding:12px 24px; border-radius:4px; z-index:1000; box-shadow:0 2px 8px rgba(0,0,0,0.15);">
+          <%= alert %>
+        </div>
+        <script>
+          setTimeout(function() {
+            const el = document.getElementById('flash-alert');
+            if (el) {
+              el.style.transition = 'opacity 1s';
+              el.style.opacity = '0';
+              setTimeout(function() { el.remove(); }, 1000);
+            }
+          }, 3000);
+        </script>
+      <% end %>
+      <%= yield %>
+    </main>
   </body>
 </html>

@@ -1,0 +1,50 @@
+<div style="max-width:600px; margin:0 auto;">
+  <h1>施設を登録</h1>
+
+  <% if @room.errors.any? %>
+    <div class="alert">
+      <% @room.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= form_with model: @room, multipart: true do |f| %>
+    <div>
+      <%= f.label :name do %>
+        <span style="color:red;">*</span>
+        施設名
+      <% end %>
+      <%= f.text_field :name %>
+    </div>
+    <div>
+      <%= f.label :description do %>
+        <span style="color:red;">*</span>
+        施設詳細
+      <% end %>
+      <%= f.text_area :description, rows: 10 %>
+    </div>
+    <div>
+      <%= f.label :price do %>
+        <span style="color:red;">*</span>
+        料金（円/日）
+      <% end %>
+      <%= f.number_field :price %>
+    </div>
+    <div>
+      <%= f.label :address do %>
+        <span style="color:red;">*</span>
+        住所
+      <% end %>
+      <%= f.text_field :address %>
+    </div>
+    <div>
+      <%= f.label :room_image, "施設画像" %>
+      <%= f.file_field :room_image %>
+    </div>
+    <div class="form-actions">
+      <%= link_to "戻る", rooms_path, class: "btn-secondary" %>
+      <%= f.submit "登録する" %>
+    </div>
+  <% end %>
+</div>

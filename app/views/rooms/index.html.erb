@@ -1,0 +1,22 @@
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+  <h1>登録施設一覧</h1>
+  <%= link_to "施設を登録する", new_room_path, class: "btn-primary" %>
+</div>
+
+<% if @rooms.any? %>
+  <div class="room-grid">
+    <% @rooms.each do |room| %>
+      <div class="room-card">
+        <%= room_image_tag(room, class: "room-image") %>
+        <div class="room-info">
+          <%= link_to room.name, room_path(room), class: "room-name" %>
+          <p class="room-description"><%= room.description %></p>
+          <p class="room-price">¥<%= number_with_delimiter(room.price) %>/日</p>
+          <p class="room-date"><%= room.created_at.strftime("%Y/%m/%d") %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p style="color:#888;">登録施設はありません。</p>
+<% end %>

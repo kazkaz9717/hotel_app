@@ -1,0 +1,23 @@
+<div style="max-width:600px; margin:0 auto;">
+  <h1 style="margin-bottom:24px;">アカウント</h1>
+
+  <div style="background:white; border:1px solid #ddd; border-radius:8px; padding:24px; margin-bottom:16px;">
+    <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
+      <%= icon_image_tag(@user, style: "width:80px; height:80px; border-radius:50%; object-fit:cover;") %>
+      <div>
+        <p style="font-size:18px; font-weight:bold;"><%= @user.name %></p>
+        <p style="color:#888;"><%= @user.bio %></p>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid #ddd; padding-top:16px;">
+      <p style="margin-bottom:8px;"><strong>メールアドレス：</strong><%= @user.email %></p>
+      <p><strong>パスワード：</strong>*********</p>
+    </div>
+  </div>
+
+  <div style="display:flex; gap:12px; justify-content:center;">
+    <%= link_to "プロフィールを編集する", edit_user_path(@user), style: "background:#3498db; color:white; padding:8px 20px; border-radius:4px; text-decoration:none;" %>
+    <%= link_to "アカウント情報を編集する", edit_account_users_path, class: "btn-primary" %>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div style="max-width:600px; margin:0 auto;">
+  <div style="text-align: center;">
+    <h1 style="margin-bottom:5px">施設を予約</h1>
+    <p class="room-name" style="font-size:20px">ホテル名：<%= @room.name %></p>
+    <p class="room-price" style="font-size:20px">宿泊費：¥<%= number_with_delimiter(@room.price) %>/日</p>
+  </div>
+
+  <% if @reservation.errors.any? %>
+    <div class="alert">
+      <% @reservation.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= form_with model: @reservation, url: confirm_reservations_path, data: { turbo: false } do |f| %>
+    <%= hidden_field_tag :room_id, @room.id %>
+    <div>
+      <%= f.label :check_in do %>
+        <span style="color:red;">*</span>
+        チェックイン日
+      <% end %>
+      <%= f.date_field :check_in %>
+    </div>
+    <div>
+      <%= f.label :check_out do %>
+        <span style="color:red;">*</span>
+        チェックアウト日
+      <% end %>
+      <%= f.date_field :check_out %>
+    </div>
+    <div>
+      <%= f.label :guests do %>
+        <span style="color:red;">*</span>
+        人数
+      <% end %>
+      <%= f.number_field :guests %>
+    </div>
+    <div class="form-actions">
+      <%= link_to "戻る", room_path(@room), class: "btn-secondary" %>
+      <%= f.submit "予約確認へ" %>
+    </div>
+  <% end %>
+</div>
