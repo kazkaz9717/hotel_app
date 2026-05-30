@@ -2,7 +2,8 @@ class ReservationsController < ApplicationController
   before_action :require_login
 
   def index
-    @reservations = current_user.reservations.includes(:room).order(check_in: :asc)
+    @current_reservations = current_user.reservations.includes(:room).where("check_out >= ?", Date.today).order(check_in: :asc)
+    @past_reservations = current_user.reservations.includes(:room).where("check_out < ?", Date.today).order(check_in: :desc)
   end
 
   def show

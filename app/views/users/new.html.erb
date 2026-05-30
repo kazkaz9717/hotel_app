@@ -11,21 +11,37 @@
 
   <%= form_with model: @user, url: signup_path do |f| %>
     <div>
-      <%= f.label :name, "名前" %>
+      <%= f.label :name do %>
+        <span style="color:red;">*</span>
+        ユーザー名
+      <% end %>
       <%= f.text_field :name %>
     </div>
+
     <div>
-      <%= f.label :email, "メールアドレス" %>
+      <%= f.label :email do %>
+        <span style="color:red;">*</span>
+        メールアドレス
+      <% end %>
       <%= f.email_field :email %>
     </div>
+    
     <div>
-      <%= f.label :password, "パスワード" %>
+      <%= f.label :password do %>
+        <span style="color:red;">*</span>
+        パスワード
+      <% end %>
       <%= f.password_field :password %>
     </div>
+
     <div>
-      <%= f.label :password_confirmation, "確認用パスワード" %>
+      <%= f.label :password_confirmation do %>
+        <span style="color:red;">*</span>
+        確認用パスワード
+      <% end %>
       <%= f.password_field :password_confirmation %>
     </div>
+    
     <%= f.submit "登録する" %>
   <% end %>
 

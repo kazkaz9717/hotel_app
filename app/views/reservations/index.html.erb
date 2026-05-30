@@ -3,23 +3,65 @@
   <%= link_to "施設を予約する", search_rooms_path, style: "background:#e74c3c; color:white; padding:8px 20px; border-radius:4px; text-decoration:none;" %>
 </div>
 
-<div class="room-grid">
-  <% @reservations.each do |reservation| %>
-    <div class="room-card">
-      <% if reservation.room.room_image.attached? %>
-        <%= image_tag reservation.room.room_image, class: "room-image" %>
-      <% else %>
-        <%= image_tag "default_room.png", class: "room-image" %>
+<div style="display:flex; border-bottom:2px solid #ddd; margin-bottom:24px;">
+  <button onclick="switchTab('current')" id="tab-current" style="padding:12px 24px; border:none; background:none; cursor:pointer; font-size:16px; font-weight:bold; color:#e74c3c; border-bottom:2px solid #e74c3c; margin-bottom:-2px;">現在の予約</button>
+  <button onclick="switchTab('past')" id="tab-past" style="padding:12px 24px; border:none; background:none; cursor:pointer; font-size:16px; color:#888;">過去の予約</button>
+</div>
+
+<div id="tab-content-current">
+  <% if @current_reservations.any? %>
+    <div class="room-grid">
+      <% @current_reservations.each do |reservation| %>
+        <div class="room-card">
+          <%= room_image_tag(reservation.room, class: "room-image") %>
+          <div class="room-info">
+            <%= link_to reservation.room.name, reservation_path(reservation), class: "room-name" %>
+            <p class="room-description"><%= reservation.room.description %></p>
+            <% nights = (reservation.check_out - reservation.check_in).to_i %>
+            <p class="room-price">合計料金：¥<%= number_with_delimiter(reservation.room.price * nights * reservation.guests) %></p>
+            <p class="room-date">チェックイン：<%= reservation.check_in.strftime("%Y/%m/%d") %></p>
+            <p class="room-date">チェックアウト：<%= reservation.check_out.strftime("%Y/%m/%d") %></p>
+            <p class="room-date">予約確定日時：<%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+          </div>
+        </div>
       <% end %>
-      <div class="room-info">
-        <%= link_to reservation.room.name, reservation_path(reservation), class: "room-name" %>
-        <p class="room-description"><%= reservation.room.description %></p>
-        <% nights = (reservation.check_out - reservation.check_in).to_i %>
-        <p class="room-date">チェックイン：<%= reservation.check_in.strftime("%Y/%m/%d") %></p>
-        <p class="room-date">チェックアウト：<%= reservation.check_out.strftime("%Y/%m/%d") %></p>
-        <p class="room-date">予約確定日時：<%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></p>
-        <p class="room-price">合計料金：¥<%= number_with_delimiter(reservation.room.price * nights * reservation.guests) %></p>
-      </div>
     </div>
+  <% else %>
+    <p style="color:#888;">現在の予約はありません。</p>
   <% end %>
 </div>
+
+<div id="tab-content-past" style="display:none;">
+  <% if @past_reservations.any? %>
+    <div class="room-grid">
+      <% @past_reservations.each do |reservation| %>
+        <div class="room-card" style="opacity:0.7;">
+          <%= room_image_tag(reservation.room, class: "room-image") %>
+          <div class="room-info">
+            <%= link_to reservation.room.name, reservation_path(reservation), class: "room-name" %>
+            <p class="room-description"><%= reservation.room.description %></p>
+            <% nights = (reservation.check_out - reservation.check_in).to_i %>
+            <p class="room-price">合計料金：¥<%= number_with_delimiter(reservation.room.price * nights * reservation.guests) %></p>
+            <p class="room-date">チェックイン：<%= reservation.check_in.strftime("%Y/%m/%d") %></p>
+            <p class="room-date">チェックアウト：<%= reservation.check_out.strftime("%Y/%m/%d") %></p>
+            <p class="room-date">予約確定日時：<%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p style="color:#888;">過去の予約はありません。</p>
+  <% end %>
+</div>
+
+<script>
+function switchTab(tab) {
+  document.getElementById('tab-content-current').style.display = tab === 'current' ? 'block' : 'none';
+  document.getElementById('tab-content-past').style.display = tab === 'past' ? 'block' : 'none';
+
+  document.getElementById('tab-current').style.color = tab === 'current' ? '#e74c3c' : '#888';
+  document.getElementById('tab-current').style.borderBottom = tab === 'current' ? '2px solid #e74c3c' : 'none';
+  document.getElementById('tab-past').style.color = tab === 'past' ? '#e74c3c' : '#888';
+  document.getElementById('tab-past').style.borderBottom = tab === 'past' ? '2px solid #e74c3c' : 'none';
+}
+</script>

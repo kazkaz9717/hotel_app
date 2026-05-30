@@ -17,11 +17,7 @@
           <% if logged_in? %>
             <div style="position:relative; display:inline-block;">
               <div onclick="document.getElementById('dropdown').style.display = document.getElementById('dropdown').style.display === 'none' ? 'block' : 'none'" style="cursor:pointer; display:flex; align-items:center; gap:8px;">
-                <% if current_user.icon_image.attached? %>
-                  <%= image_tag current_user.icon_image, style: "width:40px; height:40px; border-radius:50%; object-fit:cover;" %>
-                <% else %>
-                  <%= image_tag "default_icon.png", style: "width:40px; height:40px; border-radius:50%; object-fit:cover;" %>
-                <% end %>
+                <%= icon_image_tag(current_user, style: "width:40px; height:40px; border-radius:50%; object-fit:cover;") %>
                 <span style="color:white; font-size:16px;"><%= current_user.name %></span>
                 <span style="color:white; font-size:12px;">▼</span>
               </div>
@@ -42,9 +38,19 @@
 
     <main>
       <% if notice %>
-        <div style="background:#d4edda; color:#155724; padding:12px; border-radius:4px; margin-bottom:16px;">
+        <div id="flash-notice" style="position:fixed; top:85PX; left:50%; transform:translateX(-50%); background:#d4edda; color:#155724; padding:12px 24px; border-radius:4px; z-index:1000; box-shadow:0 2px 8px rgba(0,0,0,0.15);">
           <%= notice %>
         </div>
+        <script>
+          setTimeout(function() {
+            const el = document.getElementById('flash-notice');
+            if (el) {
+              el.style.transition = 'opacity 1s';
+              el.style.opacity = '0';
+              setTimeout(function() { el.remove(); }, 1000);
+            }
+          }, 3000);
+        </script>
       <% end %>
       <%= yield %>
     </main>

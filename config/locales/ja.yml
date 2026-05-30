@@ -24,3 +24,5 @@ ja:
       greater_than_or_equal_to: "は%{count}以上の値を入力してください"
       invalid: "は不正な値です"
       confirmation: "とパスワードの入力が一致しません"
+
+    

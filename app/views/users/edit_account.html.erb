@@ -17,19 +17,31 @@
 
   <%= form_with model: @user, url: update_account_users_path, method: :patch do |f| %>
     <div>
-      <%= f.label :email, "メールアドレス" %>
+      <%= f.label :email do %>
+        <span style="color:red;">*</span>
+        メールアドレス
+      <% end %>
       <%= f.email_field :email %>
     </div>
     <div>
-      <%= label_tag :current_password, "現在のパスワード" %>
+      <%= label_tag :current_password do %>
+        <span style="color:red;">*</span>
+        現在のパスワード
+      <% end %>
       <%= password_field_tag :current_password %>
     </div>
     <div>
-      <%= f.label :password, "パスワード" %>
+      <%= f.label :password do %>
+        <span style="color:red;">*</span>
+        パスワード
+      <% end %>
       <%= f.password_field :password %>
     </div>
     <div>
-      <%= f.label :password_confirmation, "確認用パスワード" %>
+      <%= f.label :password_confirmation do %>
+        <span style="color:red;">*</span>
+        確認用パスワード
+      <% end %>
       <%= f.password_field :password_confirmation %>
     </div>
     <div style="margin-top:8px;">

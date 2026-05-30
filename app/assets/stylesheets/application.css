@@ -84,7 +84,7 @@ input[type="submit"]:hover {
 }
 
 /* フォーム */
-form div {
+form>div {
     margin-bottom: 16px;
 }
 
@@ -106,15 +106,6 @@ form textarea {
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
-}
-
-/* カード */
-.card {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
 }
 
 /* フラッシュメッセージ */
@@ -159,10 +150,33 @@ form textarea {
     padding: 16px;
 }
 
+/* 施設情報 */
 .room-name {
     font-size: 18px;
     font-weight: bold;
     color: #c0392b;
+}
+
+.room-price {
+    color: #ed6d46;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.room-address,
+.room-date {
+    color: #888;
+    font-size: 13px;
+}
+
+.room-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #666;
+    font-size: 14px;
+    margin: 4px 0 8px;
 }
 
 /* 認証ページ */
@@ -187,30 +201,31 @@ form textarea {
     margin-top: 8px;
 }
 
-/* 紹介文 */
-.room-description {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    color: #666;
-    font-size: 14px;
-    margin: 4px 0 8px;
+/* モーダル */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
 }
 
-/* 施設情報 */
-.room-address {
-    color: #888;
-    font-size: 13px;
+.modal-content {
+    background: white;
+    padding: 32px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
 }
 
-.room-price {
-    color: #ed6d46;
-    font-weight: bold;
-    margin-top: 8px;
-}
-
-.room-date {
-    color: #888;
-    font-size: 13px;
+.modal-buttons {
+    margin-top: 24px;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
 }
