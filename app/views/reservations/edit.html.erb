@@ -35,14 +35,9 @@
       <% end %>
       <%= f.number_field :guests %>
     </div>
-    <div style="display:flex; justify-content:center; align-items:center; margin-top:16px;">
-      <div style="margin-right:48px;">
-        <%= link_to "戻る", reservation_path(@reservation),
-          style: "background:#888; color:white; padding:8px 20px; border-radius:4px;" %>
-      </div>
-      <div>
-        <%= f.submit "更新する" %>
-      </div>
+    <div class="form-actions">
+      <%= link_to "戻る", reservation_path(@reservation), class: "btn-secondary" %>
+      <%= f.submit "更新する" %>
     </div>
   <% end %>
 </div>

@@ -45,14 +45,9 @@
       <%= f.label :room_image, "施設画像" %>
       <%= f.file_field :room_image %>
     </div>
-    <div style="display:flex; justify-content:center; align-items:center; margin-top:16px;">
-      <div style="margin-right:48px;">
-        <%= link_to "戻る", room_path(@room),
-          style: "background:#888; color:white; padding:8px 20px; border-radius:4px;" %>
-      </div>
-      <div>
-        <%= f.submit "更新する" %>
-      </div>
+    <div class="form-actions">
+      <%= link_to "戻る", room_path(@room), class: "btn-secondary" %>
+      <%= f.submit "更新する" %>
     </div>
   <% end %>
 </div>

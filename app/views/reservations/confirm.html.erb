@@ -35,14 +35,13 @@
         <input type="checkbox" id="confirm_check">
         <label for="confirm_check">予約内容を確認しました。</label>
       </div>
-      <span id="check-error"
-            style="color:#c0392b; visibility:hidden; height:24px; margin-top:8px;">
+      <span id="check-error" style="color:#c0392b; visibility:hidden; height:24px; margin-top:8px;">
         ※チェックを入れてください。
       </span>
     </div>
 
-    <div style="display:flex; justify-content:center; align-items:center; margin-top:16px;">
-      <%= link_to "戻る", new_reservation_path(room_id: @room.id), style: "background:#888; color:white; padding:8px 20px; margin-right:48px; border-radius:4px;" %>
+    <div class="form-actions">
+      <%= link_to "戻る", new_reservation_path(room_id: @room.id), class: "btn-secondary" %>
       <%= f.submit "上記の内容で予約", id: "submit_btn" %>
     </div>
   <% end %>

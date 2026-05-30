@@ -14,18 +14,15 @@
       <p>宿泊日数：<%= nights %>泊</p>
       <p>人数：<%= @reservation.guests %>人</p>
       <p>予約確定日時：<%= @reservation.created_at.strftime("%Y/%m/%d %H:%M") %></p>
-
     </div>
   </div>
 
-  <div style="display:flex; justify-content:center; align-items:center; margin-top:16px;">
-    <div style="margin-right:48px;">
-      <%= link_to "戻る", reservations_path, style: "background:#888; color:white; padding:8px 20px; border-radius:4px;" %>
-    </div>
+  <div class="form-actions">
+    <%= link_to "戻る", reservations_path, class: "btn-secondary" %>
     <% if @reservation.check_out >= Date.today %>
       <div style="display:flex; gap:12px;">
-        <%= link_to "編集する", edit_reservation_path(@reservation), style: "background:#e74c3c; color:white; padding:8px 20px; border-radius:4px;" %>
-        <%= link_to "削除する", "#", onclick: "document.getElementById('delete-modal').style.display='flex'; return false;", style: "background:#e74c3c; color:white; padding:8px 20px; border-radius:4px;" %>
+        <%= link_to "編集する", edit_reservation_path(@reservation), class: "btn-primary" %>
+        <%= link_to "削除する", "#", onclick: "document.getElementById('delete-modal').style.display='flex'; return false;", class: "btn-primary" %>
       </div>
     <% end %>
   </div>
@@ -41,8 +38,8 @@
       <p>チェックアウト：<%= @reservation.check_out.strftime("%Y/%m/%d") %></p>
       <p>人数：<%= @reservation.guests %>人</p>
       <div class="modal-buttons">
-        <%= link_to "戻る", "#", onclick: "document.getElementById('delete-modal').style.display='none'; return false;", style: "background:#888; color:white; padding:8px 20px; border-radius:4px;" %>
-        <%= link_to "削除する", reservation_path(@reservation), data: { turbo_method: :delete }, style: "background:#e74c3c; color:white; padding:8px 20px; border-radius:4px;" %>
+        <%= link_to "戻る", "#", onclick: "document.getElementById('delete-modal').style.display='none'; return false;", class: "btn-secondary" %>
+        <%= link_to "削除する", reservation_path(@reservation), data: { turbo_method: :delete }, class: "btn-primary" %>
       </div>
     </div>
   </div>
