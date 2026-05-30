@@ -2,7 +2,7 @@
   <h1>プロフィールの編集</h1>
 
   <% if @user.errors.any? %>
-    <div style="background:#f8d7da; color:#721c24; padding:12px; border-radius:4px; margin-bottom:16px;">
+    <div class="alert">
       <% @user.errors.full_messages.each do |message| %>
         <p><%= message %></p>
       <% end %>
@@ -20,7 +20,7 @@
     <div>
       <%= f.label :name do %>
         <span style="color:red;">*</span>
-        名前
+        ユーザー名
       <% end %>
       <%= f.text_field :name %>
     </div>

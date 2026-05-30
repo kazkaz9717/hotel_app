@@ -229,3 +229,21 @@ form textarea {
     gap: 16px;
     justify-content: center;
 }
+
+/* エラーメッセージ */
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+/* 成功メッセージ */
+.success-message {
+    background: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
