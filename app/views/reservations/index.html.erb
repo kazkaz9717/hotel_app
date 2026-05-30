@@ -10,22 +10,47 @@
 
 <div id="tab-content-current">
   <% if @current_reservations.any? %>
-    <div class="room-grid">
-      <% @current_reservations.each do |reservation| %>
-        <div class="room-card">
-          <%= room_image_tag(reservation.room, class: "room-image") %>
-          <div class="room-info">
-            <%= link_to reservation.room.name, reservation_path(reservation), class: "room-name" %>
-            <p class="room-description"><%= reservation.room.description %></p>
-            <% nights = (reservation.check_out - reservation.check_in).to_i %>
-            <p class="room-price">合計料金：¥<%= number_with_delimiter(reservation.room.price * nights * reservation.guests) %></p>
-            <p class="room-date">チェックイン：<%= reservation.check_in.strftime("%Y/%m/%d") %></p>
-            <p class="room-date">チェックアウト：<%= reservation.check_out.strftime("%Y/%m/%d") %></p>
-            <p class="room-date">予約確定日時：<%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></p>
-          </div>
-        </div>
-      <% end %>
-    </div>
+    <table style="width:100%; border-collapse:collapse;">
+      <thead>
+        <tr style="border-bottom:2px solid #ddd;">
+          <th style="padding:12px; text-align:left;">画像</th>
+          <th style="padding:12px; text-align:left;">施設名</th>
+          <th style="padding:12px; text-align:left;">紹介文</th>
+          <th style="padding:12px; text-align:right;">合計料金</th>
+          <th style="padding:12px; text-align:right;">チェックイン</th>
+          <th style="padding:12px; text-align:right;">チェックアウト</th>
+          <th style="padding:12px; text-align:right;">予約確定日時</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @current_reservations.each do |reservation| %>
+          <% nights = (reservation.check_out - reservation.check_in).to_i %>
+          <tr style="border-bottom:1px solid #ddd;">
+            <td style="padding:12px;">
+              <%= room_image_tag(reservation.room, style: "width:80px; height:60px; object-fit:cover; border-radius:4px;") %>
+            </td>
+            <td style="padding:12px;">
+              <%= link_to reservation.room.name, reservation_path(reservation), class: "room-name" %>
+            </td>
+            <td style="padding:12px; max-width:300px;">
+              <p class="room-description"><%= reservation.room.description %></p>
+            </td>
+            <td style="padding:12px; text-align:right;" class="room-price">
+              ¥<%= number_with_delimiter(reservation.room.price * nights * reservation.guests) %>
+            </td>
+            <td style="padding:12px; text-align:right;" class="room-date">
+              <%= reservation.check_in.strftime("%Y/%m/%d") %>
+            </td>
+            <td style="padding:12px; text-align:right;" class="room-date">
+              <%= reservation.check_out.strftime("%Y/%m/%d") %>
+            </td>
+            <td style="padding:12px; text-align:right;" class="room-date">
+              <%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   <% else %>
     <p style="color:#888;">現在の予約はありません。</p>
   <% end %>
@@ -33,22 +58,47 @@
 
 <div id="tab-content-past" style="display:none;">
   <% if @past_reservations.any? %>
-    <div class="room-grid">
-      <% @past_reservations.each do |reservation| %>
-        <div class="room-card" style="opacity:0.7;">
-          <%= room_image_tag(reservation.room, class: "room-image") %>
-          <div class="room-info">
-            <%= link_to reservation.room.name, reservation_path(reservation), class: "room-name" %>
-            <p class="room-description"><%= reservation.room.description %></p>
-            <% nights = (reservation.check_out - reservation.check_in).to_i %>
-            <p class="room-price">合計料金：¥<%= number_with_delimiter(reservation.room.price * nights * reservation.guests) %></p>
-            <p class="room-date">チェックイン：<%= reservation.check_in.strftime("%Y/%m/%d") %></p>
-            <p class="room-date">チェックアウト：<%= reservation.check_out.strftime("%Y/%m/%d") %></p>
-            <p class="room-date">予約確定日時：<%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></p>
-          </div>
-        </div>
-      <% end %>
-    </div>
+    <table style="width:100%; border-collapse:collapse; opacity:0.7;">
+      <thead>
+        <tr style="border-bottom:2px solid #ddd;">
+          <th style="padding:12px; text-align:left;">画像</th>
+          <th style="padding:12px; text-align:left;">施設名</th>
+          <th style="padding:12px; text-align:left;">紹介文</th>
+          <th style="padding:12px; text-align:right;">合計料金</th>
+          <th style="padding:12px; text-align:right;">チェックイン</th>
+          <th style="padding:12px; text-align:right;">チェックアウト</th>
+          <th style="padding:12px; text-align:right;">予約確定日時</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @past_reservations.each do |reservation| %>
+          <% nights = (reservation.check_out - reservation.check_in).to_i %>
+          <tr style="border-bottom:1px solid #ddd;">
+            <td style="padding:12px;">
+              <%= room_image_tag(reservation.room, style: "width:80px; height:60px; object-fit:cover; border-radius:4px;") %>
+            </td>
+            <td style="padding:12px;">
+              <%= link_to reservation.room.name, reservation_path(reservation), class: "room-name" %>
+            </td>
+            <td style="padding:12px; max-width:300px;">
+              <p class="room-description"><%= reservation.room.description %></p>
+            </td>
+            <td style="padding:12px; text-align:right;" class="room-price">
+              ¥<%= number_with_delimiter(reservation.room.price * nights * reservation.guests) %>
+            </td>
+            <td style="padding:12px; text-align:right;" class="room-date">
+              <%= reservation.check_in.strftime("%Y/%m/%d") %>
+            </td>
+            <td style="padding:12px; text-align:right;" class="room-date">
+              <%= reservation.check_out.strftime("%Y/%m/%d") %>
+            </td>
+            <td style="padding:12px; text-align:right;" class="room-date">
+              <%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   <% else %>
     <p style="color:#888;">過去の予約はありません。</p>
   <% end %>

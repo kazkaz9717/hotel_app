@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_login, only: [:show, :edit, :update, :account, :edit_account, :update_account]
+  before_action :set_user, only: [:show, :edit, :update, :account, :edit_account, :update_account]
 
   def new
     @user = User.new
@@ -16,19 +17,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
   end
 
   def account
-    @user = current_user
   end
 
   def edit
-    @user = current_user
   end
 
   def update
-    @user = current_user
     if @user.update(profile_params)
       redirect_to account_users_path, notice: "プロフィールを更新しました"
     else
@@ -37,11 +34,9 @@ class UsersController < ApplicationController
   end
 
   def edit_account
-    @user = current_user
   end
 
   def update_account
-    @user = current_user
     if @user.authenticate(params[:current_password])
       if params[:user][:password].blank?
         @user.errors.add(:password, "を入力してください")
@@ -58,6 +53,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = current_user
+  end
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)

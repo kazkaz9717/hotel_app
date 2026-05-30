@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :require_login
+  before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
   def index
     @current_reservations = current_user.reservations.includes(:room).where("check_out >= ?", Date.today).order(check_in: :asc)
@@ -7,16 +8,13 @@ class ReservationsController < ApplicationController
   end
 
   def show
-    @reservation = current_user.reservations.find(params[:id])
   end
 
   def edit
-    @reservation = current_user.reservations.find(params[:id])
     @room = @reservation.room
   end
 
   def update
-    @reservation = current_user.reservations.find(params[:id])
     @room = @reservation.room
     if @reservation.update(reservation_params)
       redirect_to reservation_path(@reservation), notice: "予約を更新しました"
@@ -40,7 +38,6 @@ class ReservationsController < ApplicationController
       @total_price = @room.price * nights * @reservation.guests
       render :confirm
     else
-      Rails.logger.debug @reservation.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end
@@ -57,12 +54,15 @@ class ReservationsController < ApplicationController
   end
 
   def destroy
-    @reservation = current_user.reservations.find(params[:id])
     @reservation.destroy
     redirect_to reservations_path, notice: "予約を削除しました"
   end
 
   private
+
+  def set_reservation
+    @reservation = current_user.reservations.find(params[:id])
+  end
 
   def reservation_params
     params.require(:reservation).permit(:check_in, :check_out, :guests)

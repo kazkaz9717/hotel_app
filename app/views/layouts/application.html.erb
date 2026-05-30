@@ -52,6 +52,22 @@
           }, 3000);
         </script>
       <% end %>
+
+      <% if alert %>
+        <div id="flash-alert" style="position:fixed; top:85px; left:50%; transform:translateX(-50%); background:#f8d7da; color:#721c24; padding:12px 24px; border-radius:4px; z-index:1000; box-shadow:0 2px 8px rgba(0,0,0,0.15);">
+          <%= alert %>
+        </div>
+        <script>
+          setTimeout(function() {
+            const el = document.getElementById('flash-alert');
+            if (el) {
+              el.style.transition = 'opacity 1s';
+              el.style.opacity = '0';
+              setTimeout(function() { el.remove(); }, 1000);
+            }
+          }, 3000);
+        </script>
+      <% end %>
       <%= yield %>
     </main>
   </body>

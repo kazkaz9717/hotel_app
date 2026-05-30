@@ -21,7 +21,7 @@
     <%= link_to "戻る", reservations_path, class: "btn-secondary" %>
     <% if @reservation.check_out >= Date.today %>
       <div style="display:flex; gap:12px;">
-        <%= link_to "編集する", edit_reservation_path(@reservation), class: "btn-primary" %>
+        <%= link_to "変更する", edit_reservation_path(@reservation), class: "btn-primary" %>
         <%= link_to "削除する", "#", onclick: "document.getElementById('delete-modal').style.display='flex'; return false;", class: "btn-primary" %>
       </div>
     <% end %>

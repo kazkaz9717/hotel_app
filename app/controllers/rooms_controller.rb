@@ -1,13 +1,10 @@
 class RoomsController < ApplicationController
-  before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
+  before_action :require_login, only: [:index, :new, :create, :edit, :update, :destroy]
   before_action :set_room, only: [:show, :edit, :update, :destroy]
+  before_action :check_owner, only: [:edit, :update, :destroy]
 
   def index
-    if logged_in?
-      @rooms = current_user.rooms
-    else
-      redirect_to login_path, alert: "ログインしてください"
-    end
+    @rooms = current_user.rooms
   end
 
   def new
@@ -47,12 +44,8 @@ class RoomsController < ApplicationController
 
   def search
     @rooms = Room.all
-    if params[:area].present?
-      @rooms = @rooms.where("address LIKE ?", "%#{params[:area]}%")
-    end
-    if params[:keyword].present?
-      @rooms = @rooms.where("name LIKE ? OR description LIKE ?", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
-    end
+    @rooms = @rooms.where("address LIKE ?", "%#{params[:area]}%") if params[:area].present?
+    @rooms = @rooms.where("name LIKE ? OR description LIKE ?", "%#{params[:keyword]}%", "%#{params[:keyword]}%") if params[:keyword].present?
     @count = @rooms.count
   end
 
@@ -64,5 +57,11 @@ class RoomsController < ApplicationController
 
   def room_params
     params.require(:room).permit(:name, :description, :price, :address, :room_image)
+  end
+
+  def check_owner
+    unless @room.user == current_user
+      redirect_to rooms_path, alert: "権限がありません"
+    end
   end
 end

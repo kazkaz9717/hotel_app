@@ -11,7 +11,7 @@
       <td style="padding:16px 0; text-align:right;"><%= @reservation.check_out.strftime("%Y/%m/%d") %></td>
     </tr>
     <tr style="border-bottom:1px solid #ddd;">
-      <td style="padding:16px 0; font-weight:bold;">宿泊日数</td>
+      <td style="padding:16px 0; font-weight:bold;">日数</td>
       <td style="padding:16px 0; text-align:right;"><%= (@reservation.check_out - @reservation.check_in).to_i %>泊</td>
     </tr>
     <tr style="border-bottom:1px solid #ddd;">
@@ -33,7 +33,7 @@
     <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:16px;">
       <div style="display:flex; align-items:center; gap:8px;">
         <input type="checkbox" id="confirm_check">
-        <label for="confirm_check">予約内容を確認しました。</label>
+        <label for="confirm_check">上記予約内容を確認しました。</label>
       </div>
       <span id="check-error" style="color:#c0392b; visibility:hidden; height:24px; margin-top:8px;">
         ※チェックを入れてください。

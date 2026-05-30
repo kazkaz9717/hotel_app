@@ -1,6 +1,6 @@
 <div style="max-width:600px; margin:0 auto;">
   <div style="text-align: center;">
-    <h1 style="margin-bottom:5px">予約を編集する</h1>
+    <h1 style="margin-bottom:5px">予約を変更する</h1>
     <p class="room-name" style="font-size:20px">ホテル名：<%= @room.name %></p>
     <p class="room-price" style="font-size:20px">宿泊費：¥<%= number_with_delimiter(@room.price) %>/日</p>
   </div>
@@ -19,7 +19,7 @@
         <span style="color:red;">*</span>
         チェックイン日
       <% end %>
-      <%= f.date_field :check_in %>
+      <%= f.date_field :check_in, readonly: true, style: "background:#f0f0f0; cursor:not-allowed;" %>
     </div>
     <div>
       <%= f.label :check_out do %>
@@ -37,7 +37,7 @@
     </div>
     <div class="form-actions">
       <%= link_to "戻る", reservation_path(@reservation), class: "btn-secondary" %>
-      <%= f.submit "更新する" %>
+      <%= f.submit "変更する" %>
     </div>
   <% end %>
 </div>
